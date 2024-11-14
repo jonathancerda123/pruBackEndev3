@@ -6,7 +6,7 @@
 <div class="container mt-4">
     <h2>Galería de Imágenes</h2>
     {% if request.user.is_authenticated and request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
-        <a href="{% url 'musica:subir_musica' %}" class="btn btn-success mb-3">Subir artista</a>
+        <a href="{% url 'musica:subir_musica' %}" class="btn btn-success mb-3">Subir musica</a>
     {% endif %}
     <div class="row">
         {% for imagen in imagenes %}
