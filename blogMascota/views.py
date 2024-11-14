@@ -4,16 +4,16 @@ from .models import Imagen
 from .forms import ImagenForm
 from django.contrib.auth.decorators import login_required
 
-def lista(request):
+def lista_mascota(request):
     imagenes = Imagen.objects.all().order_by('-fecha_subida')
     return render(request, 'blogMascota/lista_mascota.html', {'imagenes': imagenes})
 
-def detalle(request, pk):
+def detalle_mascota(request, pk):
     imagen = get_object_or_404(Imagen, pk=pk)
     return render(request, 'blogMascota/detalle_mascota.html', {'imagen': imagen,'request':request})
 
 @login_required
-def subir(request):
+def subir_mascota(request):
     if request.user.perfil.rol in ['editor', 'administrador']:
         if request.method == 'POST':
             form = ImagenForm(request.POST, request.FILES)
@@ -29,7 +29,7 @@ def subir(request):
         return redirect('blogMascota:listaMascota')
 
 @login_required
-def editar(request, pk):
+def editar_mascota(request, pk):
     imagen = get_object_or_404(Imagen, pk=pk)
     if request.user == imagen.autor or request.user.perfil.rol == 'administrador':
         if request.method == 'POST':
@@ -46,7 +46,7 @@ def editar(request, pk):
         return redirect('blogMascota:detalleMascota', pk=pk)
     
 @login_required
-def eliminar(request, pk):
+def eliminar_mascota(request, pk):
     imagen = get_object_or_404(Imagen, pk=pk)
     if request.user == imagen.autor or request.user.perfil.rol == 'administrador':
         if request.method == 'POST':
