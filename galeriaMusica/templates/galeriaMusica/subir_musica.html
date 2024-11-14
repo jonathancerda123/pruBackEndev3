@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Subir Nueva musica</h2>
+    <h2>Subir nueva musica</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.non_field_errors }}
