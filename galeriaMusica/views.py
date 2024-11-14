@@ -26,12 +26,12 @@ def subir_musica(request):
                 imagen = form.save(commit=False)
                 imagen.compositor = request.user
                 imagen.save()
-                return redirect('galeriaMusica:detalle_musica', pk=imagen.pk)
+                return redirect('musica:detalle_musica', pk=imagen.pk)
         else:
             form = ImagenForm()
-        return render(request, 'galeriaMusica/subir_musica.html', {'form': form})
+        return render(request, 'musica/subir_musica.html', {'form': form})
     else:
-        return redirect('galeriaMusica:lista_musica')
+        return redirect('musica:lista_musica')
     
 
 @login_required
@@ -43,13 +43,13 @@ def editar_musica(request, pk):
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Imagen actualizada exitosamente.')
-                return redirect('galeriaMusica:detalle_musica', pk=imagen.pk)
+                return redirect('musica:detalle_musica', pk=imagen.pk)
         else:
             form = ImagenForm(instance=imagen)
         return render(request, 'galeriaMusica/editar_musica.html', {'form': form, 'imagen': imagen})
     else:
         messages.error(request, 'No tienes permiso para editar esta imagen.')
-        return redirect('galeriaMusica:detalle_musica', pk=pk)
+        return redirect('musica:detalle_musica', pk=pk)
 
 @login_required
 def eliminar_musica(request, pk):
@@ -58,9 +58,9 @@ def eliminar_musica(request, pk):
         if request.method == 'POST':
             imagen.delete()
             messages.success(request, 'Imagen eliminada exitosamente.')
-            return redirect('galeriaMusica:lista_musica')
+            return redirect('musica:lista_musica')
         else:
             return render(request, 'galeriaMusica/eliminar_musica.html', {'imagen': imagen})
     else:
         messages.error(request, 'No tienes permiso para eliminar esta imagen.')
-        return redirect('galeriaMusica:detalle_musica', pk=pk)
+        return redirect('musica:detalle_musica', pk=pk)
