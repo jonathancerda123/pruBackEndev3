@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'usuarios',
     'blogMascota',
     'productos',
+    'galeriaZapatillas',
 ]
 
 MIDDLEWARE = [
