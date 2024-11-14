@@ -24,7 +24,7 @@ def subir_musica(request):
             form = ImagenForm(request.POST, request.FILES)
             if form.is_valid():
                 imagen = form.save(commit=False)
-                imagen.autor = request.user
+                imagen.compositor = request.user
                 imagen.save()
                 return redirect('galeriaMusica:detalle_musica', pk=imagen.pk)
         else:
@@ -37,7 +37,7 @@ def subir_musica(request):
 @login_required
 def editar_musica(request, pk):
     imagen = get_object_or_404(Imagen, pk=pk)
-    if request.user == imagen.autor or request.user.perfil.rol == 'administrador':
+    if request.user == imagen.compositor or request.user.perfil.rol == 'administrador':
         if request.method == 'POST':
             form = ImagenForm(request.POST, request.FILES, instance=imagen)
             if form.is_valid():
@@ -54,7 +54,7 @@ def editar_musica(request, pk):
 @login_required
 def eliminar_musica(request, pk):
     imagen = get_object_or_404(Imagen, pk=pk)
-    if request.user == imagen.autor or request.user.perfil.rol == 'administrador':
+    if request.user == imagen.compositor or request.user.perfil.rol == 'administrador':
         if request.method == 'POST':
             imagen.delete()
             messages.success(request, 'Imagen eliminada exitosamente.')
