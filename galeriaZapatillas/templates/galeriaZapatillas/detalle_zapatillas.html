@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ imagen.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ imagen.titulo }}</h2>
+    <p><small class="text-muted">Subida por {{ imagen.marca.username }} el {{ imagen.fecha_subida|date:"d/m/Y H:i" }}</small></p>
+    <hr>
+    <img src="{{ imagen.imagen.url }}" class="img-fluid mb-4" alt="{{ imagen.titulo }}">
+    <p>{{ imagen.descripcion }}</p>
+    {% if request.user.is_authenticated and request.user == imagen.marca or request.user.perfil.rol == 'administrador' %}
+        <a href="{% url 'zapatillas:editar_zapatillas' imagen.pk %}" class="btn btn-secondary">Editar Imagen</a>
+        <form action="{% url 'zapatillas:eliminar_zapatillas imagen.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar Imagen</button>
+        </form>
+    {% endif %}
+
+    <a href="{% url 'zapatillas:lista_zapatillas' %}" class="btn btn-link mt-3">Volver a la Galería</a>
+</div>
+{% endblock %}
