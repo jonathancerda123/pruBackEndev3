@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle del Producto{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Detalle del Producto</h1>
+    <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
+    <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+    <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+    <p><strong>Stock:</strong> {{ producto.stock }}</p>
+    <a href="{% url 'productos:lista_productos' %}" class="btn btn-secondary">Volver a la lista</a>
+    {% if request.user.is_authenticated and request.user.perfil.rol == 'administrador' %}
+        <a href="{% url 'productos:editar_producto' producto.id %}" class="btn btn-warning">Editar</a>
+        <a href="{% url 'productos:eliminar_producto' producto.id %}" class="btn btn-danger">Eliminar</a>
+    {% endif %}
+</div>
+{% endblock %}
