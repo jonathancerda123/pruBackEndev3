@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import RegistroForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import Perfil
 
 
 def registro(request):
@@ -14,7 +15,7 @@ def registro(request):
         if form.is_valid():
             user = form.save(commit=False)  
             user.set_password(form.cleaned_data['password']) 
-            user.save()#
+            user.save()
             user.perfil.rol = form.cleaned_data['rol']
             user.perfil.save()
             messages.success(request, 'Registro exitoso. Ahora puedes iniciar sesión.')
