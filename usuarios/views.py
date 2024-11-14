@@ -30,7 +30,7 @@ def login_view(request):
         usuario = authenticate(request, username=username, password=password)
         if usuario is not None:
             login(request, usuario)
-            return redirect('blog:lista_articulos')
+            return redirect('blogMascota:lista_mascota')
         else:
             messages.error(request, 'Nombre de usuario o contraseña incorrectos.')
     return render(request, 'usuarios/login.html')
