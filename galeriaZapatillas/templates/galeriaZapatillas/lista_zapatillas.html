@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Galería de Imágenes</h2>
+    <h2>Galería de Zapatillas</h2>
     {% if request.user.is_authenticated and request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
         <a href="{% url 'zapatillas:subir_zapatillas' %}" class="btn btn-success mb-3">Subir zapatilla</a>
     {% endif %}
