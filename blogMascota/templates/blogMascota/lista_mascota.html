@@ -7,7 +7,7 @@
     <h2>Blog Mascotas</h2>
     <hr>
     {% if request.user.is_authenticated and request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
-        <a href="{% url 'blogMascota:subir_mascota' %}" class="btn btn-success mb-3">Subir Imagen</a>
+        <a href="{% url 'blogMascota:subirMascota' %}" class="btn btn-success mb-3">Subir Imagen</a>
     {% endif %}
     <div class="row">
         {% for imagen in imagenes %}
@@ -22,8 +22,8 @@
 
                           </ul>
                         {% if request.user.is_authenticated and request.user == imagen.autor or request.user.perfil.rol == 'administrador' %}
-                             <a href="{% url 'blogMascota:editar_mascota' imagen.pk %}" class="btn btn-secondary btn-sm">Editar Imagen</a>
-                            <form action="{% url 'blogMascota:eliminar_mascota' imagen.pk %}" method="post" style="display:inline;">
+                             <a href="{% url 'blogMascota:editarMascota' imagen.pk %}" class="btn btn-secondary btn-sm">Editar Imagen</a>
+                            <form action="{% url 'blogMascota:eliminarMascota' imagen.pk %}" method="post" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar Imagen</button>
                             </form>
