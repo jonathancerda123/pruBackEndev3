@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Productos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Lista de Productos</h1>
+    {% if request.user.is_authenticated and request.user.perfil.rol == 'administrador' %}
+        <a href="{% url 'productos:crear_producto' %}" class="btn btn-primary mb-3">Crear Producto</a>
+    {% endif %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>
+                    <a href="{% url 'productos:detalle_producto' producto.id %}" class="btn btn-info btn-sm">Ver</a>
+                    {% if request.user.is_authenticated and request.user.perfil.rol == 'administrador' %}
+                        <a href="{% url 'productos:editar_producto' producto.id %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'productos:eliminar_producto' producto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
