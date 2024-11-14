@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Galería{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Blog Mascotas</h2>
+    <hr>
+    {% if request.user.is_authenticated and request.user.perfil.rol == 'editor' or request.user.perfil.rol == 'administrador' %}
+        <a href="{% url 'blogMascota:subir_mascota' %}" class="btn btn-success mb-3">Subir Imagen</a>
+    {% endif %}
+    <div class="row">
+        {% for imagen in imagenes %}
+            <div class="col-md-4" >
+                <div class="card mb-3 img-thumbnail" style="width: 18rem;">
+                    <img src="{{ imagen.imagen.url }}" class="card-img-top" alt="{{ imagen.titulo }}">
+                    <div class="card-body">
+                        <h5 class="card-title">Titulo: {{ imagen.titulo }}</h5>
+                        <p>Descripción: {{ imagen.descripcion }}</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">An item</li>
+
+                          </ul>
+                        {% if request.user.is_authenticated and request.user == imagen.autor or request.user.perfil.rol == 'administrador' %}
+                             <a href="{% url 'blogMascota:editar_mascota' imagen.pk %}" class="btn btn-secondary btn-sm">Editar Imagen</a>
+                            <form action="{% url 'blogMascota:eliminar_mascota' imagen.pk %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar Imagen</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
