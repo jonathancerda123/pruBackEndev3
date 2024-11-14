@@ -16,8 +16,10 @@ def registro(request):
             user = form.save(commit=False)  
             user.set_password(form.cleaned_data['password']) 
             user.save()
-            user.perfil.rol = form.cleaned_data['rol']
-            user.perfil.save()
+            # Crear el perfil asociado al usuario
+            perfil = Perfil.objects.create(user=user, rol=form.cleaned_data['rol'])
+            perfil.save()
+            
             messages.success(request, 'Registro exitoso. Ahora puedes iniciar sesión.')
             return redirect('usuarios:login')
     else:
