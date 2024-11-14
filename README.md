@@ -1,1 +1,4 @@
 # pruBackEndev3
+# se creo un entorno virtual (.venv) usando los comandos correspondientes presentes en el paso a paso del profesor, instalaremos todos los requerimientos para el proyecto ingresando el siguiente comando: "pip install -r requirements.txt".Se creo el proyecto junto con las respectivas aplicaciones y todas sus config. Para finalizar la configuración, debemos generar migraciones para conectar la base de datos, las cuales se hicieron con "python manage.py makemigrations" y "python manage.py migrate". 
+# para comprobar el correcto funcionamiento ejecutamos el comando respectivo(python manage.py runserver) y verificamos que nuestras conexiones y url estan perfectamentes linkeadas.
+# por poco fallecemos en el proceso :| pero no es parte de los pasos
