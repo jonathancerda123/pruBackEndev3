@@ -6,8 +6,7 @@
     {% load static %}
     <!-- CSS de Bootstrap desde CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Tu archivo de estilos CSS -->
-    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
 </head>
 <body>
     <!-- Barra de navegación -->
@@ -24,10 +23,10 @@
                         <a class="nav-link" href="{% url 'blogMascota:listaMascota' %}">Blog Mascota</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'galeriaMusica:lista_musica' %}"></a>
+                        <a class="nav-link" href="{% url 'musica:lista_musica' %}"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'galeriaZapatillas:lista_zapatillas' %}">
+                        <a class="nav-link" href="{% url 'zapatillas:lista_zapatillas' %}">
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'productos:lista_productos' %}">Tablas de Productos</a>
