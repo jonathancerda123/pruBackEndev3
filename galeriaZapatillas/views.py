@@ -21,12 +21,12 @@ def subir_zapatillas(request):
                 imagen = form.save(commit=False)
                 imagen.marca = request.user
                 imagen.save()
-                return redirect('galeriaZapatillas:detalle_zapatillas', pk=imagen.pk)
+                return redirect('zapatillas:detalle_zapatillas', pk=imagen.pk)
         else:
             form = ImagenForm()
         return render(request, 'galeriaZapatillas/subir_zapatillas.html', {'form': form})
     else:
-        return redirect('galeriaZapatillas:lista_zapatillas')
+        return redirect('zapatillas:lista_zapatillas')
 
 @login_required
 def editar_zapatillas(request, pk):
@@ -37,13 +37,13 @@ def editar_zapatillas(request, pk):
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Imagen actualizada exitosamente.')
-                return redirect('galeriaZapatillas:detalle_zapatillas', pk=imagen.pk)
+                return redirect('zapatillas:detalle_zapatillas', pk=imagen.pk)
         else:
             form = ImagenForm(instance=imagen)
         return render(request, 'galeriaZapatillas/editar_zapatillas.html', {'form': form, 'imagen': imagen})
     else:
         messages.error(request, 'No tienes permiso para editar esta imagen.')
-        return redirect('galeriaZapatillas:detalle_zapatillas', pk=pk)
+        return redirect('zapatillas:detalle_zapatillas', pk=pk)
     
 @login_required
 def eliminar_zapatillas(request, pk):
@@ -52,9 +52,9 @@ def eliminar_zapatillas(request, pk):
         if request.method == 'POST':
             imagen.delete()
             messages.success(request, 'Imagen eliminada exitosamente.')
-            return redirect('galeriaZapatillas:lista_zapatillas')
+            return redirect('zapatillas:lista_zapatillas')
         else:
             return render(request, 'galeriaZapatillas/eliminar_zapatillas.html', {'imagen': imagen})
     else:
         messages.error(request, 'No tienes permiso para eliminar esta imagen.')
-        return redirect('galeriaZapatillas:detalle_zapatillas', pk=pk)
+        return redirect('zapatillas:detalle_zapatillas', pk=pk)
