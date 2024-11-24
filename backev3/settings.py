@@ -79,8 +79,7 @@ WSGI_APPLICATION = 'backev3.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-from decouple import Config
-config = Config('.env')
+from decouple import config
 import pymysql
 pymysql.install_as_MySQLdb()
 DATABASES = {
