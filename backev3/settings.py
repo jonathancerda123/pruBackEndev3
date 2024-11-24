@@ -92,6 +92,7 @@ DATABASES = {
         'PORT': config('DB_PORT', default='3306'),
     }
 }
+print(config('DB_USER'))
 
 
 
