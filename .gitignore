@@ -4,3 +4,4 @@
 .DS_Store
 .env
 .venv
+django_project/__pycache__/
