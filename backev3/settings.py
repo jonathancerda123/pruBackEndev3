@@ -80,6 +80,7 @@ WSGI_APPLICATION = 'backev3.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 from decouple import config
+config = config()
 import pymysql
 pymysql.install_as_MySQLdb()
 DATABASES = {
@@ -88,7 +89,7 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
+        'HOST': config('DB_HOST', default='localhost'),
         'PORT': config('DB_PORT', default='3306'),
     }
 }
