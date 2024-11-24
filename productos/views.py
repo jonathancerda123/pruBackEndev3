@@ -10,7 +10,7 @@ def lista_productos(request):
 
 def detalle_producto(request, pk):
     producto = get_object_or_404(Producto, pk=pk)
-    return render(request, 'productos/detalle_producto.html', {'producto': producto})
+    return render(request, 'productos/detalle_productos.html', {'producto': producto})
 
 @login_required
 def crear_producto(request):
@@ -23,7 +23,7 @@ def crear_producto(request):
                 return redirect('productos:lista_productos')
         else:
             form = ProductoForm()
-        return render(request, 'productos/crear_producto.html', {'form': form})
+        return render(request, 'productos/crear_productos.html', {'form': form})
     else:
         return redirect('productos:lista_productos')
 
@@ -38,7 +38,7 @@ def editar_producto(request, pk):
             return redirect('productos:lista_productos')
     else:
         form = ProductoForm(instance=producto)
-    return render(request, 'productos/editar_producto.html', {'form': form})
+    return render(request, 'productos/editar_productos.html', {'form': form})
 
 @login_required
 def eliminar_producto(request, pk):
@@ -47,4 +47,4 @@ def eliminar_producto(request, pk):
         producto.delete()
         messages.success(request, 'Producto eliminado exitosamente.')
         return redirect('productos:lista_productos')
-    return render(request, 'productos/eliminar_producto.html', {'producto': producto})
+    return render(request, 'productos/eliminar_productos.html', {'producto': producto})
